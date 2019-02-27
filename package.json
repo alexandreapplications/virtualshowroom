@@ -1,0 +1,32 @@
+{
+  "name": "virtualshowroom",
+  "version": "1.0.0",
+  "description": "Provides infrastructure for a virtual showroom application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc",
+    "dev": "ts-node-dev --respawn --transpileOnly ./app/app.ts",
+    "prod": "tsc && node ./build/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexandreapplications/virtualshowroom.git"
+  },
+  "keywords": [
+    "showroom",
+    "pictures"
+  ],
+  "author": "Alexandre Sampaio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexandreapplications/virtualshowroom/issues"
+  },
+  "homepage": "https://github.com/alexandreapplications/virtualshowroom#readme",
+  "dependencies": {
+    "@types/express": "^4.16.1",
+    "express": "^4.16.4",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "typescript": "^3.3.3333"
+  }
+}
