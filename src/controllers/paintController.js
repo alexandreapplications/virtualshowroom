@@ -1,6 +1,8 @@
-var paintApplication = require("../application/paintApplication");
+const PaintModel = require("../models/paintModel");
+var paintModel = new PaintModel();
+
 exports.getList = (req, res, next) => {
-  paintApplication.getList().then(querySnapShot => {
+  paintModel.getList().then(querySnapShot => {
     var data = [];
     querySnapShot.forEach(x => data.push(x.data()));
     res.status(200).send(data);
@@ -8,7 +10,7 @@ exports.getList = (req, res, next) => {
 };
 exports.getSingle = (req, res, next) => {
   let id = req.params.id;
-  paintApplication.getSingle(id).then(doc => {
+  paintModel.getSingle(id).then(doc => {
     if (doc.exists) {
       res.status(200).send(doc.data());
     } else {
@@ -17,7 +19,7 @@ exports.getSingle = (req, res, next) => {
   });
 };
 exports.post = (req, res, next) => {
-  paintApplication
+  paintModel
     .add(req.body)
     .then(record => {
       res.status(201).send(record);
@@ -32,11 +34,11 @@ exports.post = (req, res, next) => {
 };
 exports.put = (req, res, next) => {
   let id = req.params.id;
-  paintApplication.update(id, req.body);
+  paintModel.update(id, req.body);
 };
 exports.delete = (req, res, next) => {
   let id = req.params.id;
-  paintApplication
+  paintModel
     .delete(id)
     .then(record => {
       res.status(201).send(record);
