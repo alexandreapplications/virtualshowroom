@@ -36,6 +36,7 @@
     "moment": "^2.24.0"
   },
   "devDependencies": {
+    "body-parser": "^1.18.3",
     "chance": "^1.0.18",
     "jest": "^24.1.0"
   }
