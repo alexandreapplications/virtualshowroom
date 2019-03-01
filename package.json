@@ -5,7 +5,13 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon ./bin/server.js"
+    "serve": "nodemon ./bin/server.js",
+    "flint": "./node_modules/.bin/eslint --max-warnings=0 .",
+    "fserve": "firebase serve --only functions",
+    "fshell": "firebase experimental:functions:shell",
+    "fstart": "npm run shell",
+    "fdeploy": "firebase deploy --only functions",
+    "flogs": "firebase functions:log"
   },
   "repository": {
     "type": "git",
@@ -23,8 +29,11 @@
   "homepage": "https://github.com/alexandreapplications/virtualshowroom#readme",
   "dependencies": {
     "@google-cloud/firestore": "^1.0.1",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
-    "firebase-admin": "^7.0.0"
+    "firebase-admin": "^7.0.0",
+    "firebase-functions": "^2.2.0",
+    "moment": "^2.24.0"
   },
   "devDependencies": {
     "chance": "^1.0.18",

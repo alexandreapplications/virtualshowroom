@@ -7,9 +7,16 @@ admin.initializeApp({
   databaseURL: "https://paintshowroom.firebaseio.com"
 });
 
+// [START additionalimports]
+const cors = require("cors")({
+  origin: true
+});
+// [END additionalimports]
+
 const express = require("express");
 var bodyParser = require("body-parser");
 const app = express();
+app.use(cors);
 app.use(bodyParser.json());
 const index = require("./routes/index");
 const paintRoute = require("./routes/paintRoute");

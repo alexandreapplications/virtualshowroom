@@ -2,21 +2,39 @@ const PaintModel = require("../models/paintModel");
 var paintModel = new PaintModel();
 
 exports.getList = (req, res, next) => {
-  paintModel.getList().then(querySnapShot => {
-    var data = [];
-    querySnapShot.forEach(x => data.push(x.data()));
-    res.status(200).send(data);
-  });
+  paintModel
+    .getList()
+    .then(querySnapShot => {
+      var data = [];
+      querySnapShot.forEach(x => data.push(x.data()));
+      res.status(200).send(data);
+    })
+    .catch(error => {
+      if (error === 404) {
+        res.status(404).send(error);
+      } else {
+        res.status(401).send(error);
+      }
+    });
 };
 exports.getSingle = (req, res, next) => {
   let id = req.params.id;
-  paintModel.getSingle(id).then(doc => {
-    if (doc.exists) {
-      res.status(200).send(doc.data());
-    } else {
-      res.status(404).send("Document not found");
-    }
-  });
+  paintModel
+    .getSingle(id)
+    .then(doc => {
+      if (doc.exists) {
+        res.status(200).send(doc.data());
+      } else {
+        res.status(404).send("Document not found");
+      }
+    })
+    .catch(error => {
+      if (error === 404) {
+        res.status(404).send(error);
+      } else {
+        res.status(401).send(error);
+      }
+    });
 };
 exports.post = (req, res, next) => {
   paintModel

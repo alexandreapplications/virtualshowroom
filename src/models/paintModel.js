@@ -6,14 +6,32 @@ module.exports = function() {
   const validationModel = new ValidationModel();
 
   this.getList = () => {
-    return db.collection("paints").get();
+    return new Promise((resolve, reject) => {
+      try {
+        resolve(db.collection("paints").get());
+      } catch (error) {
+        reject(error);
+      }
+    });
   };
 
   this.getSingle = id => {
-    return db
-      .collection("paints")
-      .doc(id)
-      .get();
+    return new Promise((resolve, reject) => {
+      try {
+        db.collection("paints")
+          .doc(id)
+          .get()
+          .then(doc => {
+            if (doc.exists) {
+              resolve(doc);
+            } else {
+              resolve(404);
+            }
+          });
+      } catch (error) {
+        reject(error);
+      }
+    });
   };
 
   this.add = value => {
