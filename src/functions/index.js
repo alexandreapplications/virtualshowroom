@@ -10,9 +10,30 @@ const cors = require("cors")({
 });
 // [END additionalimports]
 
-const app = require("../app");
+// [START setup firebase]
+var admin = require("firebase-admin");
 
-exports.crud = functions.https.onRequest(app);
+var serviceAccount = require("../../keys/paintshowroom-firebase-adminsdk-nsi44-ea9a4b00a9.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://paintshowroom.firebaseio.com"
+});
+// [END setup firebase]
+
+const express = require("express");
+const bodyParser = require("body-parser");
+const paintRoute = require("../routes/paintRoute");
+
+function setupRoute(route) {
+  const app = express();
+  app.use(cors);
+  app.use(bodyParser.json());
+  app.use("/", route);
+  return app;
+}
+
+exports.paint = functions.https.onRequest(setupRoute(paintRoute));
 
 // [START trigger]
 exports.date = functions.https.onRequest((req, res) => {
