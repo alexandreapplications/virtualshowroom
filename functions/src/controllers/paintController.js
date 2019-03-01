@@ -2,6 +2,7 @@ const PaintModel = require("../models/paintModel");
 var paintModel = new PaintModel();
 
 exports.getList = (req, res, next) => {
+  console.log("[START call getlist]");
   paintModel
     .getList()
     .then(querySnapShot => {
@@ -10,6 +11,7 @@ exports.getList = (req, res, next) => {
       res.status(200).send(data);
     })
     .catch(error => {
+      console.error("[ERROR loading getlist]", error);
       if (error === 404) {
         res.status(404).send(error);
       } else {
