@@ -53,7 +53,6 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
-
   /*
   ** Build configuration
   */
@@ -64,6 +63,15 @@ module.exports = {
       stylus: {
         import: ['~assets/style/variables.styl']
       }
+    },
+
+    /*
+    ** Fallback configuration
+    */
+    generate: {
+      fallback: true // if you want to use '404.html' instead of the default '200.html'
+      // fallback: 'my-fallback/file.html' // if your hosting needs a custom location
+      // https://nuxtjs.org/guide/routing/
     },
 
     /*
