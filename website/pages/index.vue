@@ -1,15 +1,15 @@
 <template>
   <v-container grid-list-md text-xs-justified>
     <v-layout row wrap>
-      <v-flex xs12 sm6 md4 v-for="item in dataList" :key="item.id">
+      <v-flex v-for="item in dataList" :key="item.id" md4 xs12 sm6>
         <v-card>
-          <v-img v-bind:src="item.url" height="300px"></v-img>
+          <v-img :src="item.url" height="300px"></v-img>
           <v-card-title>{{ item.name }}</v-card-title>
           <v-card-text>{{ item.author}}</v-card-text>
           <v-card-actions>
             <!-- <router-link :to="'/imovel/' + filtro.nrRefImovel" append>{{ filtro.nomeSite}}</router-link> -->
-            <v-btn flat color="orange" v-on:click="goDetails(item)">Detalhes</v-btn>
-            <v-btn flat color="orange" v-on:click="goContact(item)">Contato</v-btn>
+            <v-btn flat color="orange" @click="goDetails(item)">Detalhes</v-btn>
+            <v-btn flat color="orange" @click="goContact(item)">Contato</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -26,6 +26,9 @@ export default {
       dataList: []
     }
   },
+  created() {
+    this.getData()
+  },
   methods: {
     getData: function() {
       axios
@@ -40,9 +43,6 @@ export default {
     goContact: function(model) {
       this.$router.push(`./contact/${model.id}`)
     }
-  },
-  created() {
-    this.getData()
   }
 }
 </script>
